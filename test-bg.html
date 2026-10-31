@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تأثير Micro Stats الطبي</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background-color: #f8fafc;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        #canvas-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .content {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            text-align: center;
+            color: #0066cc;
+            pointer-events: none; 
+        }
+        
+        .content h1 { font-size: 4rem; margin-bottom: 10px; font-weight: 900; }
+        .content p { font-size: 1.5rem; color: #475569; font-weight: 600; }
+    </style>
+</head>
+<body>
+
+    <canvas id="canvas-bg"></canvas>
+
+    <div class="content">
+        <h1>المخبر الذكي</h1>
+        <p>حرّك الماوس هنا.. وشوف التأثير</p>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('canvas-bg');
+        const ctx = canvas.getContext('2d');
+
+        let width, height;
+        let particles = [];
+        const spacing = 22; 
+
+        const baseColor = 'rgba(0, 102, 204, 0.35)'; 
+        const hoverColor = { r: 0, g: 180, b: 255 }; 
+
+        let mouse = { x: -1000, y: -1000 };
+
+        function resize() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+            initGrid();
+        }
+
+        function initGrid() {
+            particles = [];
+            for (let x = 0; x < width; x += spacing) {
+                for (let y = 0; y < height; y += spacing) {
+                    particles.push({
+                        x: x,
+                        y: y,
+                        baseX: x,
+                        baseY: y,
+                        size: Math.random() * 2 + 2, 
+                        density: (Math.random() * 20) + 5
+                    });
+                }
+            }
+        }
+
+        window.addEventListener('mousemove', (e) => {
+            mouse.x = e.clientX;
+            mouse.y = e.clientY;
+        });
+
+        window.addEventListener('mouseleave', () => {
+            mouse.x = -1000;
+            mouse.y = -1000;
+        });
+
+        function draw() {
+            ctx.clearRect(0, 0, width, height);
+
+            for (let i = 0; i < particles.length; i++) {
+                let p = particles[i];
+
+                let dx = mouse.x - p.x;
+                let dy = mouse.y - p.y;
+                let distance = Math.sqrt(dx * dx + dy * dy);
+                
+                // هون صغرنا الدائرة (قللنا الرقم من 180 لـ 110)
+                 
+                let maxDistance = 125; 
+                if (distance < maxDistance) {
+                    let force = (maxDistance - distance) / maxDistance;
+                    let directionX = dx / distance;
+                    let directionY = dy / distance;
+                    
+                    p.x -= directionX * force * p.density * 2.5;
+                    p.y -= directionY * force * p.density * 2.5;
+                    
+                    ctx.fillStyle = `rgba(${hoverColor.r}, ${hoverColor.g}, ${hoverColor.b}, ${force + 0.4})`;
+                    
+                    ctx.beginPath();
+                    ctx.moveTo(p.x, p.y);
+                    ctx.lineTo(mouse.x, mouse.y);
+                    ctx.strokeStyle = `rgba(${hoverColor.r}, ${hoverColor.g}, ${hoverColor.b}, ${force * 0.3})`;
+                    ctx.lineWidth = 1;
+                    ctx.stroke();
+
+                } else {
+                    ctx.fillStyle = baseColor;
+                    
+                    p.x -= (p.x - p.baseX) * 0.1;
+                    p.y -= (p.y - p.baseY) * 0.1;
+                }
+
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+
+            requestAnimationFrame(draw);
+        }
+
+        window.addEventListener('resize', resize);
+        resize();
+        draw();
+    </script>
+</body>
+</html>

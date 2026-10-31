@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>تتبع النتائج | المخبر الذكي</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body style="background-color: var(--bg);">
+
+  <nav class="navbar scrolled" style="position: relative; height: 70px;">
+    <div class="container nav-container">
+      <a href="index.html" class="logo" style="font-size: 20px;">
+        <span class="logo-icon">🔬</span>
+        <span class="logo-text">المخبر الذكي</span>
+      </a>
+      <a href="index.html" class="btn btn-outline" style="padding: 6px 16px; font-size: 14px;">الرئيسية</a>
+    </div>
+  </nav>
+
+  <main class="container" style="padding: 60px 20px; max-width: 600px;">
+    
+    <div class="tracking-box card">
+      <div style="text-align: center; margin-bottom: 30px;">
+        <span style="font-size: 50px;">🔍</span>
+        <h2 style="color: var(--primary-dark); margin-top: 10px;">تتبع حالة عينتك</h2>
+        <p style="color: var(--text-muted);">أدخل رقم الحجز أو رقم هاتفك لمعرفة حالة التحليل.</p>
+      </div>
+
+      <div class="form-group">
+        <input type="text" id="trackingInput" class="form-control" placeholder="مثال: 12345 أو 093xxxxxxx" style="text-align: center; font-size: 18px;">
+      </div>
+      <button id="trackBtn" class="btn btn-primary" style="width: 100%;">استعلام</button>
+
+      <!-- نتيجة الاستعلام -->
+      <div id="resultArea" style="display: none; margin-top: 30px;">
+        
+        <div class="status-timeline">
+          <!-- الخطوات -->
+          <div class="status-step completed" id="step1">
+            <div class="step-icon">✓</div>
+            <div class="step-text">تم استلام العينة</div>
+          </div>
+          <div class="status-line" id="line1"></div>
+          
+          <div class="status-step" id="step2">
+            <div class="step-icon">🔬</div>
+            <div class="step-text">قيد التحليل</div>
+          </div>
+          <div class="status-line" id="line2"></div>
+          
+          <div class="status-step" id="step3">
+            <div class="step-icon">📄</div>
+            <div class="step-text">النتيجة جاهزة</div>
+          </div>
+        </div>
+
+        <div id="downloadArea" style="display: none; text-align: center; margin-top: 20px;">
+          <a href="#" id="downloadReportBtn" class="btn btn-primary" style="background: #16a34a; color: #fff;">
+            📥 تحميل التقرير الطبي (PDF)
+          </a>
+        </div>
+
+      </div>
+    </div>
+
+  </main>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

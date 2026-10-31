@@ -1,0 +1,15 @@
+{
+    "name": "المخبر الذكي - Smart Lab",
+    "short_name": "المخبر الذكي",
+    "start_url": "./index.html",
+    "display": "standalone",
+    "background_color": "#f8fafc",
+    "theme_color": "#0066cc",
+    "icons": [
+      {
+        "src": "https://cdn-icons-png.flaticon.com/512/3004/3004458.png",
+        "sizes": "512x512",
+        "type": "image/png"
+      }
+    ]
+  }

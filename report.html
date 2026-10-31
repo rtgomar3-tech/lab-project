@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>التقرير الطبي | المخبر الذكي</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body style="background: #e2e8f0; padding: 40px 20px;">
+
+  <!-- أزرار التحكم (مخفية وقت الطباعة) -->
+  <div class="no-print" style="max-width: 800px; margin: 0 auto 20px; display: flex; justify-content: space-between;">
+    <a href="results.html" class="btn btn-outline" style="background: #fff;">← رجوع</a>
+    <button onclick="window.print()" class="btn btn-primary" style="background: #16a34a; color: #fff;">🖨️ طباعة / حفظ PDF</button>
+  </div>
+
+  <!-- ورقة التقرير -->
+  <div class="report-paper card" id="reportContent">
+    
+    <!-- رأس التقرير -->
+    <div class="report-header">
+      <div class="report-logo">
+        <span style="font-size: 40px;">🔬</span>
+        <div>
+          <h1 style="color: var(--primary); margin: 0; font-size: 28px;">المخبر الذكي</h1>
+          <p style="color: var(--text-muted); font-size: 14px; margin: 0;">Smart Lab Diagnostics</p>
+        </div>
+      </div>
+      <div class="report-meta">
+        <p><strong>التاريخ:</strong> <span id="reportDate">2026-10-28</span></p>
+        <p><strong>رقم التقرير:</strong> <span id="reportId">#12345</span></p>
+      </div>
+    </div>
+
+    <!-- بيانات المريض -->
+    <div class="patient-info">
+      <div class="info-row">
+        <span>اسم المريض: <strong id="reportPatientName">---</strong></span>
+        <span>العمر: <strong>30 سنة</strong></span>
+        <span>الجنس: <strong>ذكر</strong></span>
+      </div>
+    </div>
+
+    <!-- جدول النتائج -->
+    <table class="report-table">
+      <thead>
+        <tr>
+          <th>اسم التحليل</th>
+          <th>النتيجة</th>
+          <th>المعدل الطبيعي</th>
+          <th>الحالة</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>فيتامين د (Vitamin D)</td>
+          <td>35 ng/mL</td>
+          <td>30 - 100</td>
+          <td style="color: #16a34a; font-weight: bold;">طبيعي</td>
+        </tr>
+        <tr>
+          <td>فيتامين ب12 (Vitamin B12)</td>
+          <td>250 pg/mL</td>
+          <td>200 - 900</td>
+          <td style="color: #16a34a; font-weight: bold;">طبيعي</td>
+        </tr>
+        <tr>
+          <td>وظائف الغدة الدرقية (TSH)</td>
+          <td>5.5 mIU/L</td>
+          <td>0.4 - 4.0</td>
+          <td style="color: #dc2626; font-weight: bold;">مرتفع</td>
+        </tr>
+        <tr>
+          <td>صورة دم كاملة (CBC)</td>
+          <td>طبيعي</td>
+          <td>---</td>
+          <td style="color: #16a34a; font-weight: bold;">طبيعي</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- تذييل التقرير -->
+    <div class="report-footer">
+      <div class="signature">
+        <p>توقيع الطبيب المسؤول</p>
+        <div class="sign-line"></div>
+      </div>
+      <div class="report-qr">
+        <img src="https://api.qrserver.com/v1/create-qr-code/?size=80x80&data=https://smartlab.com/verify" alt="Verify QR">
+        <p>امسح للتحقق</p>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

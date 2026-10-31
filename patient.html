@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>بوابة المريض | المخبر الذكي</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+    <!-- مكتبة Swiper للعجلة 3D -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+</head>
+<body style="background-color: var(--bg);">
+
+  <!-- ضيف هالسطر هنا -->
+  <canvas id="patient-bg"></canvas>
+
+  <!-- Navbar مبسط -->
+  <nav class="navbar scrolled" style="position: relative; height: 70px;">
+    <div class="container nav-container">
+      <a href="index.html" class="logo" style="font-size: 20px;">
+        <span class="logo-icon">🔬</span>
+        <span class="logo-text">المخبر الذكي</span>
+      </a>
+      <a href="index.html" class="btn btn-outline" style="padding: 6px 16px; font-size: 14px;">الرئيسية</a>
+    </div>
+  </nav>
+
+  <main class="container" style="padding: 40px 20px; max-width: 800px;">
+    
+    <div class="section-header" style="text-align: right; margin-bottom: 30px;">
+      <h2 style="color: var(--primary); font-size: 28px;">احجز موعدك الآن</h2>
+      <p style="color: var(--text-muted);">املأ البيانات التالية وسيتواصل معك المخبر لتأكيد الموعد.</p>
+    </div>
+
+    <!-- المساعد الذكي -->
+    <div class="smart-assistant card">
+      <div class="assistant-header">
+        <span class="icon">🤖</span>
+        <h3>المساعد الذكي: ما هي الأعراض التي تشعر بها؟</h3>
+      </div>
+      <select id="symptomSelect" class="form-control">
+        <option value="">-- اختر العَرَض --</option>
+        <option value="fatigue">تعب وإرهاق مستمر</option>
+        <option value="hair_loss">تساقط شعر وضعف أظافر</option>
+        <option value="stomach">ألم في المعدة أو عسر هضم</option>
+        <option value="bone">ألم في العظام أو المفاصل</option>
+      </select>
+      <div id="suggestionResult" class="suggestion-box" style="display: none;">
+        <!-- JS سيظهر النتيجة هنا -->
+      </div>
+    </div>
+
+    <!-- الباقات الطبية -->
+    <h3 style="margin: 30px 0 15px; color: var(--primary-dark);">أو اختر إحدى الباقات الجاهزة:</h3>
+    <div class="packages-grid">
+      <div class="package-card" onclick="selectPackage('باقة الفحص الشامل', 45)">
+        <h4>الفحص الشامل</h4>
+        <p>10 تحاليل أساسية</p>
+        <strong>45$</strong>
+      </div>
+      <div class="package-card" onclick="selectPackage('باقة الفيتامينات', 30)">
+        <h4>باقة الفيتامينات</h4>
+        <p>فيتامين د، ب12، حديد</p>
+        <strong>30$</strong>
+      </div>
+      <div class="package-card" onclick="selectPackage('باقة ما قبل الزواج', 50)">
+        <h4>فحص ما قبل الزواج</h4>
+        <p>فحوصات الدم الوراثية</p>
+        <strong>50$</strong>
+      </div>
+    </div>
+
+    <!-- فورم الحجز -->
+    <form id="bookingForm" class="booking-form" style="margin-top: 30px;">
+      
+      <div class="form-row">
+        <div class="form-group">
+          <label>الاسم الكامل</label>
+          <input type="text" id="patientName" class="form-control" placeholder="اكتب اسمك" required>
+        </div>
+        <div class="form-group">
+          <label>رقم الهاتف (واتساب)</label>
+          <input type="tel" id="patientPhone" class="form-control" placeholder="09xxxxxxxx" required dir="ltr">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>التحاليل المطلوبة</label>
+        <input type="text" id="testType" class="form-control" placeholder="اختر من الباقات أو المساعد الذكي.." readonly>
+      </div>
+
+      <div class="form-group">
+        <label>مكان سحب العينة</label>
+        <div class="radio-group">
+          <label class="radio-label">
+            <input type="radio" name="location" value="في المخبر" checked> في المخبر
+          </label>
+          <label class="radio-label">
+            <input type="radio" name="location" value="سحب منزلي"> سحب منزلي (+5$)
+          </label>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>الموعد المفضل</label>
+        
+        <!-- حقل التاريخ -->
+        <input type="date" id="patientDate" class="form-control ltr-input" required style="margin-bottom: 15px;">
+        
+        <!-- عجلة اختيار الوقت 3D -->
+        <div class="wheel-container">
+          <div class="swiper timeSwiper">
+            <div class="swiper-wrapper" id="timeSlotsContainer">
+              <!-- الجافاسكريبت رح يعبي الأوقات هنا -->
+            </div>
+          </div>
+          <!-- التدرج الأبيض فوق وتحت -->
+          <div class="wheel-gradient top"></div>
+          <div class="wheel-gradient bottom"></div>
+          <!-- المؤشر اللي بالنص -->
+          <div class="wheel-highlight"></div>
+        </div>
+        <input type="hidden" id="patientTime" required>
+      </div>
+
+      <!-- رفع الوصفة -->
+      <div class="form-group upload-box">
+        <label>📄 إرفاق صورة الوصفة الطبية (اختياري)</label>
+        <input type="file" id="prescription" accept="image/*" class="file-input">
+        <small style="color: var(--text-muted);">هذا يسرّع عملية الاستقبال.</small>
+      </div>
+
+      <button type="submit" class="btn btn-primary btn-lg" style="width: 100%; margin-top: 20px;">
+        تأكيد الحجز وإرسال للواتساب
+      </button>
+    </form>
+
+    <!-- شاشة النجاح -->
+    <div id="successMsg" style="display: none; text-align: center; margin-top: 30px; padding: 20px; background: #dcfce7; color: #166534; border-radius: 12px;">
+      <h3>✅ تم استلام طلبك بنجاح!</h3>
+      <p>سيتم تحويلك للواتساب لتأكيد الحجز مع المخبر.</p>
+    </div>
+
+  </main>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

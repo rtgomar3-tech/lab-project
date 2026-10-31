@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>المخبر الذكي | Smart Lab</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0066cc">
+</head>
+<body>
+  <canvas id="canvas-bg"></canvas>
+  <!-- Navbar -->
+  <nav class="navbar" id="navbar">
+    <div class="container nav-container">
+      <a href="#" class="logo">
+        <span class="logo-icon">🔬</span>
+        <span class="logo-text">المخبر الذكي</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#home">الرئيسية</a></li>
+        <li><a href="#features">مميزاتنا</a></li>
+        <li><a href="patient.html" class="btn btn-outline">بوابة المريض</a></li>
+      </ul>
+      <button class="hamburger" id="hamburger">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero" id="home">
+    <div class="container hero-content">
+      <div class="hero-text reveal">
+        <span class="badge">🏥 رعاية صحية متطورة</span>
+        <h1 class="glitch-text" data-text="مخبرك الطبي بين يديك">
+          مخبرك الطبي <span class="highlight">بين يديك</span>
+        </h1>
+        <p>احجز موعدك، تابع حالة عينتك، واستلم نتائجك بضغطة زر. نظام متكامل للأطباء والمرضى يضمن لك الدقة والسرعة.</p>
+        <div class="hero-buttons">
+          <a href="patient.html" class="btn btn-primary btn-lg">احجز موعد الآن</a>
+          <a href="#features" class="btn btn-ghost btn-lg">اكتشف المميزات</a>
+        </div>
+      </div>
+      <div class="hero-image reveal">
+        <!-- صورة تعبيرية لمخبر -->
+        <img src="https://images.unsplash.com/photo-1579154204601-01588f351e67?w=600&q=80" alt="Laboratory">
+        <div class="floating-card">
+          <span class="icon">✅</span>
+          <div>
+            <strong>نتائج دقيقة</strong>
+            <small>خلال 24 ساعة</small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="features" id="features">
+    <div class="container">
+      <div class="section-header reveal">
+        <h2>لماذا المخبر الذكي؟</h2>
+        <p>تقنيات حديثة لخدمة صحتك وراحتك</p>
+      </div>
+      <div class="features-grid">
+        
+        <div class="feature-card reveal">
+          <div class="feature-icon">📅</div>
+          <h3>حجز إلكتروني سريع</h3>
+          <p>احجز موعدك في المخبر أو اطلب سحب العينة من منزلك بكل سهولة.</p>
+        </div>
+
+        <div class="feature-card reveal">
+          <div class="feature-icon">📱</div>
+          <h3>تتبع حالة العينة</h3>
+          <p>تابع مراحل تحليل عينتك لحظة بلحظة (قيد السحب، قيد التحليل، جاهزة).</p>
+        </div>
+
+        <div class="feature-card reveal">
+          <div class="feature-icon">🖨️</div>
+          <h3>تقارير طبية فورية</h3>
+          <p>استلم نتائجك كملف PDF أنيق، أو اطبعها مباشرة لطبيبك المعالج.</p>
+        </div>
+
+        <div class="feature-card reveal">
+          <div class="feature-icon">💬</div>
+          <h3>إشعارات واتساب</h3>
+          <p>نرسل لك رسالة فورية على الواتساب بمجرد صدور نتائجك.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+  <!-- قسم الموقع الجغرافي -->
+  <section class="location-section" id="location">
+    <div class="container">
+      <div class="section-header reveal">
+        <h2>موقعنا على الخريطة</h2>
+        <p>تفضل بزيارتنا في المخبر، أو تواصل معنا للاستفسار.</p>
+      </div>
+      <div class="map-container reveal">
+        <!-- كود خريطة جوجل -->
+        <iframe 
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3246.378459068973!2d37.1546534152575!3d36.20210398008665!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x152ef1e50164a4f3%3A0xc6f70f0e23554c3b!2sAleppo%2C%20Syria!5e0!3m2!1sen!2s!4v1633025000000!5m2!1sen!2s" 
+          width="100%" 
+          height="400" 
+          style="border:0;" 
+          allowfullscreen="" 
+          loading="lazy">
+        </iframe>
+      </div>
+    </div>
+  </section>
+  <!-- Footer -->
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container" style="display: flex; flex-direction: column; align-items: center; gap: 20px;">
+        <!-- الباركود -->
+        <div style="background: #fff; padding: 15px; border-radius: 12px; box-shadow: 0 10px 20px rgba(0,0,0,0.2);">
+          <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://rtgomar3-tech.github.io/fade-barbershop/" alt="QR Code" style="width: 100px; height: 100px;">
+          <p style="color: var(--primary-dark); font-weight: bold; font-size: 12px; margin-top: 8px; text-align: center;">امسح للدخول السريع</p>
+        </div>
+        <p>© 2026 المخبر الذكي - جميع الحقوق محفوظة.</p>
+      </div>
+    </footer>
+
+    <div class="container">
+      <p>© 2026 المخبر الذكي - جميع الحقوق محفوظة.</p>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
