@@ -577,3 +577,29 @@ main {
   background-color: var(--primary) !important; /* تخلي الخلفية زرقاء */
   border-color: var(--primary) !important;
 }
+/* الحقول الثلاثية (العمر، الوزن، الجنس) */
+.form-row-3 {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+@media (max-width: 600px) {
+  .form-row-3 { grid-template-columns: 1fr; }
+}
+
+/* تنبيه الصيام */
+.warning-box {
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  border-right: 4px solid #dc2626;
+  color: #991b1b;
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 14px;
+  animation: fadeIn 0.4s ease;
+}
