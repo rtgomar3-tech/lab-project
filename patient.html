@@ -73,70 +73,99 @@
       </div>
     </div>
 
-    <!-- فورم الحجز -->
-    <form id="bookingForm" class="booking-form" style="margin-top: 30px;">
+        <!-- فورم الحجز -->
+        <form id="bookingForm" class="booking-form" style="margin-top: 30px;">
       
-      <div class="form-row">
-        <div class="form-group">
-          <label>الاسم الكامل</label>
-          <input type="text" id="patientName" class="form-control" placeholder="اكتب اسمك" required>
-        </div>
-        <div class="form-group">
-          <label>رقم الهاتف (واتساب)</label>
-          <input type="tel" id="patientPhone" class="form-control" placeholder="09xxxxxxxx" required dir="ltr">
-        </div>
-      </div>
-
-      <div class="form-group">
-        <label>التحاليل المطلوبة</label>
-        <input type="text" id="testType" class="form-control" placeholder="اختر من الباقات أو المساعد الذكي.." readonly>
-      </div>
-
-      <div class="form-group">
-        <label>مكان سحب العينة</label>
-        <div class="radio-group">
-          <label class="radio-label">
-            <input type="radio" name="location" value="في المخبر" checked> في المخبر
-          </label>
-          <label class="radio-label">
-            <input type="radio" name="location" value="سحب منزلي"> سحب منزلي (+5$)
-          </label>
-        </div>
-      </div>
-
-      <div class="form-group">
-        <label>الموعد المفضل</label>
-        
-        <!-- حقل التاريخ -->
-        <input type="date" id="patientDate" class="form-control ltr-input" required style="margin-bottom: 15px;">
-        
-        <!-- عجلة اختيار الوقت 3D -->
-        <div class="wheel-container">
-          <div class="swiper timeSwiper">
-            <div class="swiper-wrapper" id="timeSlotsContainer">
-              <!-- الجافاسكريبت رح يعبي الأوقات هنا -->
+          <!-- البيانات الشخصية (جديدة) -->
+          <div class="form-row-3">
+            <div class="form-group">
+              <label>العمر</label>
+              <input type="number" id="patientAge" class="form-control ltr-input" placeholder="مثال: 30" required>
+            </div>
+            <div class="form-group">
+              <label>الوزن (كغ)</label>
+              <input type="number" id="patientWeight" class="form-control ltr-input" placeholder="مثال: 75" required>
+            </div>
+            <div class="form-group">
+              <label>الجنس</label>
+              <select id="patientGender" class="form-control">
+                <option value="ذكر">ذكر</option>
+                <option value="أنثى">أنثى</option>
+              </select>
             </div>
           </div>
-          <!-- التدرج الأبيض فوق وتحت -->
-          <div class="wheel-gradient top"></div>
-          <div class="wheel-gradient bottom"></div>
-          <!-- المؤشر اللي بالنص -->
-          <div class="wheel-highlight"></div>
-        </div>
-        <input type="hidden" id="patientTime" required>
-      </div>
-
-      <!-- رفع الوصفة -->
-      <div class="form-group upload-box">
-        <label>📄 إرفاق صورة الوصفة الطبية (اختياري)</label>
-        <input type="file" id="prescription" accept="image/*" class="file-input">
-        <small style="color: var(--text-muted);">هذا يسرّع عملية الاستقبال.</small>
-      </div>
-
-      <button type="submit" class="btn btn-primary btn-lg" style="width: 100%; margin-top: 20px;">
-        تأكيد الحجز وإرسال للواتساب
-      </button>
-    </form>
+    
+          <div class="form-row">
+            <div class="form-group">
+              <label>الاسم الكامل</label>
+              <input type="text" id="patientName" class="form-control" placeholder="اكتب اسمك" required>
+            </div>
+            <div class="form-group">
+              <label>رقم الهاتف (واتساب)</label>
+              <input type="tel" id="patientPhone" class="form-control" placeholder="09xxxxxxxx" required dir="ltr">
+            </div>
+          </div>
+    
+          <!-- التحاليل (يدوي، قائمة، باقات، أو صورة) -->
+          <div class="form-group">
+            <label>التحاليل المطلوبة (اكتب يدوياً، اختر من القائمة، أو ارفع صورة)</label>
+            <input type="text" id="testType" class="form-control" list="testsList" placeholder="اكتب اسم التحليل أو اختر من القائمة..." required>
+            <datalist id="testsList">
+              <option value="صورة دم كاملة (CBC)">
+              <option value="سكر صائم (FBS)">
+              <option value="فيتامين د (Vitamin D)">
+              <option value="فيتامين ب12 (B12)">
+              <option value="وظائف الغدة الدرقية (TSH)">
+              <option value="دهون ثلاثية (Triglycerides)">
+              <option value="كوليسترول (Cholesterol)">
+              <option value="وظائف الكبد (LFT)">
+              <option value="وظائف الكلى (RFT)">
+              <option value="حديد (Ferritin)">
+            </datalist>
+          </div>
+    
+          <!-- ميزة الذكاء الاصطناعي: تحليل صورة الوصفة -->
+          <div class="form-group upload-box" style="background: #e6f0fa; border-color: var(--primary);">
+            <label style="color: var(--primary-dark); display: flex; align-items: center; gap: 8px;">
+              <span style="font-size: 20px;">🤖</span> 
+              <strong>ميزة ذكية: ارفع صورة الوصفة لتحليلها آلياً</strong>
+            </label>
+            <input type="file" id="prescription" accept="image/*" class="file-input" style="margin-top: 10px;">
+            <small style="color: var(--text-muted); display: block; margin-top: 5px;">سيقوم الذكاء الاصطناعي باستخراج أسماء التحاليل وأسعارها تلقائياً.</small>
+            <div id="aiLoader" style="display: none; margin-top: 10px; color: var(--primary); font-weight: bold;">
+              ⏳ جاري تحليل الصورة بالذكاء الاصطناعي...
+            </div>
+          </div>
+    
+          <!-- تنبيه الصيام -->
+          <div id="fastingWarning" class="warning-box" style="display: none;">
+            <span style="font-size: 20px;">⚠️</span>
+            <div>
+              <strong>تنبيه هام:</strong> بعض التحاليل المختارة تتطلب <strong>الصيام من 8 إلى 12 ساعة</strong> قبل سحب العينة (يُسمح بشرب الماء فقط).
+            </div>
+          </div>
+    
+          <div class="form-group">
+            <label>مكان سحب العينة</label>
+            <div class="radio-group">
+              <label class="radio-label">
+                <input type="radio" name="location" value="في المخبر" checked> في المخبر
+              </label>
+              <label class="radio-label">
+                <input type="radio" name="location" value="سحب منزلي"> سحب منزلي (+5$)
+              </label>
+            </div>
+          </div>
+    
+          <div class="form-group">
+            <label>الموعد المفضل</label>
+            <input type="date" id="patientDate" class="form-control ltr-input" required>
+          </div>
+    
+          <button type="submit" class="btn btn-primary btn-lg" style="width: 100%; margin-top: 20px;">
+            تأكيد الحجز وإرسال للواتساب
+          </button>
+        </form>
 
     <!-- شاشة النجاح -->
     <div id="successMsg" style="display: none; text-align: center; margin-top: 30px; padding: 20px; background: #dcfce7; color: #166534; border-radius: 12px;">
