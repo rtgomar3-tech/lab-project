@@ -76,6 +76,43 @@
       testTypeInput.value = name + ' - ' + price + '$';
     };
 
+        // ميزة محاكاة الذكاء الاصطناعي لتحليل صورة الوصفة
+        const prescriptionInput = document.getElementById('prescription');
+        const aiLoader = document.getElementById('aiLoader');
+        const fastingWarning = document.getElementById('fastingWarning');
+    
+        if (prescriptionInput) {
+          prescriptionInput.addEventListener('change', function() {
+            if (this.files && this.files.length > 0) {
+              aiLoader.style.display = 'block';
+              
+              // محاكاة تحليل الذكاء الاصطناعي (تأخير ثانيتين)
+              setTimeout(() => {
+                aiLoader.style.display = 'none';
+                
+                // تعبئة التحاليل تلقائياً (كما لو أن الـ AI قرأها من الصورة)
+                testTypeInput.value = 'سكر صائم (FBS), صورة دم كاملة (CBC), فيتامين د (Vitamin D)';
+                
+                // تفعيل تنبيه الصيام لأن السكر صائم
+                fastingWarning.style.display = 'flex';
+                
+                alert('✅ تم تحليل الصورة بنجاح! تم استخراج 3 تحاليل وتحديد السعر التقديري: 25$.');
+              }, 2000);
+            }
+          });
+        }
+    
+        // تفعيل تنبيه الصيام لو المريض كتب تحاليل معينة يدوياً
+        if (testTypeInput) {
+          testTypeInput.addEventListener('input', function() {
+            const val = this.value;
+            if (val.includes('سكر') || val.includes('دهون') || val.includes('كوليسترول') || val.includes('صائم')) {
+              fastingWarning.style.display = 'flex';
+            } else {
+              fastingWarning.style.display = 'none';
+            }
+          });
+        }
     // 3. إرسال الفورم للواتساب
     const bookingForm = document.getElementById('bookingForm');
     const successMsg = document.getElementById('successMsg');
@@ -85,6 +122,9 @@
 
       const name = document.getElementById('patientName').value;
       const phone = document.getElementById('patientPhone').value;
+      const age = document.getElementById('patientAge').value;
+      const weight = document.getElementById('patientWeight').value;
+      const gender = document.getElementById('patientGender').value;
       const test = testTypeInput.value;
       const location = document.querySelector('input[name="location"]:checked').value;
       
@@ -109,13 +149,13 @@
       // صياغة رسالة الواتساب للمخبر
       const waText = encodeURIComponent(
         `مرحباً، أود حجز موعد في المخبر:\n` +
-        `👤 الاسم: ${name}\n` +
+        `👤 الاسم: ${name} (${gender})\n` +
+        `🎂 العمر: ${age} سنة | ⚖️ الوزن: ${weight} كغ\n` +
         `📞 الهاتف: ${phone}\n` +
         `🧪 التحاليل: ${test}\n` +
         `📍 المكان: ${location}\n` +
         `📅 الموعد: ${fullDateTime}\n`
       );
-
       // فتح الواتساب (حط رقم المخبر هنا)
       window.open(`https://wa.me/963900000000?text=${waText}`, '_blank');
 
